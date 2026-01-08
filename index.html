@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>71 — Access System</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- ===== PREVIEW META (DISCORD / SOCIAL) ===== -->
+<meta property="og:title" content="71 — Access System" />
+<meta property="og:description" content="This is not a hype server. It’s a structured system for discipline, mindset and long-term consistency." />
+<meta property="og:image" content="https://nq71.github.io/71/Images/vorschau.jpg" />
+<meta property="og:url" content="https://nq71.github.io/71/" />
+<meta property="og:type" content="website" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="71 — Access System" />
+<meta name="twitter:description" content="This is not a hype server. It’s a structured system for discipline, mindset and long-term consistency." />
+<meta name="twitter:image" content="https://nq71.github.io/71/Images/vorschau.jpg" />
+<!-- ========================================== -->
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+<style>
+:root{
+    --violet:#9d4edd;
+    --blue:#6b7cff;
+    --glass:rgba(255,255,255,.05);
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+    font-family:Inter,sans-serif;
+    background:#000;
+    color:#fff;
+    overflow-x:hidden;
+    cursor:none;
+}
+
+/* ===== BOOT ===== */
+#boot{
+    position:fixed;inset:0;
+    background:#000;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:100;
+    letter-spacing:4px;
+}
+
+/* ===== BACKGROUND ===== */
+canvas{position:fixed;inset:0;z-index:-4}
+.nebula{
+    position:fixed;inset:-35%;
+    background:
+      radial-gradient(circle at 25% 30%,rgba(157,78,221,.35),transparent 55%),
+      radial-gradient(circle at 75% 65%,rgba(107,124,255,.3),transparent 55%);
+    filter:blur(140px);
+    z-index:-3;
+}
+
+/* ===== CURSOR ===== */
+.cursor{
+    position:fixed;
+    width:240px;height:240px;
+    background:radial-gradient(circle,rgba(157,78,221,.28),transparent 70%);
+    pointer-events:none;
+    transform:translate(-50%,-50%);
+    z-index:10;
+}
+
+/* ===== HERO ===== */
+header{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:40px;
+}
+header img{
+    width:140px;
+    filter:drop-shadow(0 0 40px rgba(255,255,255,.35));
+    animation:float 8s ease-in-out infinite;
+}
+@keyframes float{
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(-18px)}
+}
+header h1{
+    font-size:4.6rem;
+    letter-spacing:10px;
+    margin-top:25px;
+}
+header p{
+    max-width:720px;
+    opacity:.85;
+    line-height:1.9;
+    margin-top:22px;
+}
+
+/* ===== SYMBOL ORBS ===== */
+.symbols{
+    display:flex;
+    gap:48px;
+    margin-top:90px;
+    flex-wrap:wrap;
+    justify-content:center;
+}
+.orb{
+    width:120px;height:120px;
+    border-radius:50%;
+    background:radial-gradient(circle,var(--violet),transparent 70%);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:2.1rem;
+    cursor:pointer;
+    box-shadow:0 0 80px rgba(157,78,221,.6);
+    animation:floatOrb 6s ease-in-out infinite;
+}
+.orb:nth-child(2){animation-duration:7s}
+.orb:nth-child(3){animation-duration:5.5s}
+.orb:nth-child(4){animation-duration:6.8s}
+.orb:nth-child(5){animation-duration:7.5s}
+
+@keyframes floatOrb{
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(-14px)}
+}
+.orb:hover{
+    transform:scale(1.25) rotate(8deg);
+    box-shadow:0 0 150px rgba(157,78,221,1);
+}
+
+/* ===== CTA ===== */
+.cta{
+    margin-top:80px;
+    padding:18px 52px;
+    border-radius:60px;
+    background:linear-gradient(135deg,#6b7cff,#9d4edd);
+    color:#fff;
+    text-decoration:none;
+    font-weight:600;
+    box-shadow:0 0 90px rgba(157,78,221,.6);
+    transition:.35s;
+    animation:pulse 2s infinite;
+}
+@keyframes pulse{
+    0%{transform:scale(1)}
+    50%{transform:scale(1.08)}
+    100%{transform:scale(1)}
+}
+.cta:hover{
+    transform:scale(1.12);
+    box-shadow:0 0 140px rgba(157,78,221,.95);
+    color:#000;
+}
+
+/* ===== PANEL ===== */
+.panel{
+    position:fixed;inset:0;
+    background:rgba(0,0,0,.85);
+    backdrop-filter:blur(20px);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:50;
+}
+.panel .box{
+    max-width:760px;
+    padding:60px;
+    border-radius:30px;
+    background:var(--glass);
+    border:1px solid rgba(255,255,255,.15);
+    box-shadow:0 0 90px rgba(157,78,221,.7);
+    text-align:center;
+}
+.panel p{
+    opacity:.85;
+    letter-spacing:1px;
+}
+.close{
+    margin-top:40px;
+    opacity:.6;
+    cursor:pointer;
+}
+
+/* ===== DISCORD ===== */
+section{
+    padding:140px 20px;
+    text-align:center;
+}
+iframe{
+    border-radius:18px;
+    border:2px solid var(--blue);
+    box-shadow:0 0 40px rgba(107,124,255,.6);
+}
+
+/* ===== FOOTER ===== */
+footer{
+    text-align:center;
+    padding:80px;
+    opacity:.5;
+}
+
+@media(max-width:768px){
+    header h1{font-size:3rem}
+    .orb{width:100px;height:100px}
+}
+</style>
+</head>
+
+<body>
+
+<div id="boot">INITIALIZING SYSTEM 71…</div>
+
+<canvas id="stars"></canvas>
+<div class="nebula"></div>
+<div class="cursor" id="cursor"></div>
+
+<header>
+    <!-- LOGO JETZT AUS Images/ -->
+    <img src="Images/logo.png" alt="71">
+    <h1>71</h1>
+    <p>No hype. No noise.<br>A private space for discipline, structure and long-term mastery.</p>
+
+    <div class="symbols">
+        <div class="orb">𖣂</div>
+        <div class="orb">𖤍</div>
+        <div class="orb">𓆰𓆪</div>
+        <div class="orb">🗡</div>
+        <div class="orb">𒉭</div>
+    </div>
+
+    <a class="cta" href="https://discord.gg/C8zWMDhe">Request Access</a>
+</header>
+
+<section>
+<h2>Live Discord</h2>
+<iframe src="https://discord.com/widget?id=1446828318778327145&theme=dark"
+width="360" height="520"></iframe>
+</section>
+
+<footer>
+© 2026 — 71 • Discipline over motivation
+</footer>
+
+<!-- PANELS -->
+<div class="panel" id="p1"><div class="box"><p>YOU vs YOU</p><div class="close" onclick="closePanel()">CLOSE</div></div></div>
+<div class="panel" id="p2"><div class="box"><p>STAY SMART</p><div class="close" onclick="closePanel()">CLOSE</div></div></div>
+<div class="panel" id="p3"><div class="box"><p>STAY DISCIPLINED</p><div class="close" onclick="closePanel()">CLOSE</div></div></div>
+<div class="panel" id="p4"><div class="box"><p>STAY CONSISTENT</p><div class="close" onclick="closePanel()">CLOSE</div></div></div>
+<div class="panel" id="p5"><div class="box"><p>DISCIPLINE > MOTIVATION</p><div class="close" onclick="closePanel()">CLOSE</div></div></div>
+
+<script>
+/* BOOT */
+setTimeout(()=>boot.style.display="none",2200);
+
+/* STARS */
+const c=document.getElementById("stars"),ctx=c.getContext("2d");
+let w,h,stars=[];
+function resize(){w=c.width=innerWidth;h=c.height=innerHeight}
+addEventListener("resize",resize);resize();
+for(let i=0;i<420;i++){
+stars.push({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.4,s:Math.random()*0.9+.2});
+}
+function draw(){
+ctx.clearRect(0,0,w,h);
+stars.forEach(st=>{
+st.y-=st.s;
+if(st.y<0)st.y=h;
+ctx.beginPath();
+ctx.arc(st.x,st.y,st.r,0,Math.PI*2);
+ctx.fillStyle="rgba(255,255,255,.85)";
+ctx.fill();
+});
+requestAnimationFrame(draw);
+}
+draw();
+
+/* CURSOR */
+const cur=document.getElementById("cursor");
+addEventListener("mousemove",e=>{
+cur.style.left=e.clientX+"px";
+cur.style.top=e.clientY+"px";
+});
+
+/* PANELS */
+function openPanel(id){document.getElementById(id).style.display="flex"}
+function closePanel(){
+document.querySelectorAll(".panel").forEach(p=>p.style.display="none");
+}
+</script>
+
+</body>
+</html>
